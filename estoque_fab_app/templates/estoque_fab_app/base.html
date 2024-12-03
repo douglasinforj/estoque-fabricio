@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% block title %}Sistema Controle Estoque{% endblock %}</title>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>Estoque</li>
+            <li>Compras</li>
+            <li>Pedidos</li>
+            <li>Fornecedores</li>
+            <li>Clientes</li>
+            <li>Login</li>
+        </ul>
+
+        <ul>
+            <li><a href="#">ITPRO -SISTEMAS</a></li>
+            <li>Home</li>
+            <li>Estoque</li>
+            <li>Compras</li>
+            <li>Pedidos</li>
+            <li>Fornecedores</li>
+            <li>Clientes</li>
+            <li>Login</li>
+            <li class="menu-button"  onclick=""><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+        </ul>
+
+    </nav>
+
+    <div class="">
+        {% block content %}
+        <!-- Conteúdo específico da página vai aqui -->
+
+        {% endblock %}
+    </div>
     
 </body>
 </html>
