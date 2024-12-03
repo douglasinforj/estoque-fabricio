@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 
 class Produto(models.Model):
     nome = models.CharField(max_length=100)
@@ -33,8 +34,8 @@ class ItemPedido(models.Model):
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
     def save(self, *args, **kwargs):
-        # Calcula o subtotal e atualiza o estoque do produto
-        self.subtotal = self.quantidade * self.preco_unitario
+        # Converte quantidade para Decimal e calcula o subtotal
+        self.subtotal = Decimal(self.quantidade) * self.preco_unitario
         super().save(*args, **kwargs)
 
         # Atualiza o estoque
@@ -72,10 +73,21 @@ class ItemCompra(models.Model):
     subtotal = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
     def save(self, *args, **kwargs):
-        # Calcula o subtotal e atualiza o estoque do produto
-        self.subtotal = self.quantidade * self.preco_unitario
+        # Converte quantidade para Decimal antes de calcular
+        self.subtotal = Decimal(self.quantidade) * self.preco_unitario
         super().save(*args, **kwargs)
 
         # Atualiza o estoque
-        self.produto.estoque_atual += self.quantidade
+        if isinstance(self, ItemPedido):  # Para saídas
+            self.produto.estoque_atual -= self.quantidade
+            if self.produto.estoque_atual < 0:
+                raise ValueError("Estoque insuficiente para o produto.")
+        elif isinstance(self, ItemCompra):  # Para entradas
+            self.produto.estoque_atual += self.quantidade
+
         self.produto.save()
+
+
+'''
+quantidade = models.DecimalField(max_digits=10, decimal_places=2), evitaria conversão.
+'''
