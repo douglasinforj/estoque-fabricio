@@ -35,12 +35,16 @@
 
     </nav>
 
-    <div class="">
+    <div class="container">
         {% block content %}
         <!-- Conteúdo específico da página vai aqui -->
 
         {% endblock %}
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Controle de Estoque. Criado por Douglas.</p>
+    </footer>
 
     <script src="{% static 'js/scripts.js' %}"></script>
     

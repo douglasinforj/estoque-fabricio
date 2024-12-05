@@ -77,6 +77,22 @@ nav li:first-child{
 }
 
 
+
+
+.footer {
+    position:fixed;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    background-color: #f3f3f3;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 100;
+    
+}
+
+
 /* Responsividade da pagina */
 
 @media(max-width: 800px){
@@ -89,10 +105,11 @@ nav li:first-child{
     }
 }
 
-@media(max-width: 400px){
+@media(max-width: 475px){
     .sidebar{
         width: 100%;
     }
+   
 }
 
 
